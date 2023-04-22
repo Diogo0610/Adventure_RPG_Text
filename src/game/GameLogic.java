@@ -4,6 +4,9 @@ import java.util.Scanner;
 public class GameLogic {
 	static Scanner scanner = new Scanner(System.in);
 	static Player player;
+	public static boolean isRunning;
+	public static int place = 0, act;
+	public static String[] places = {"Everlasting Moutains", "Haunted LandLines", "Castle", "Throne Room"};
 	
 	public static int readInt(String prompt, int userChoices) {
 		int input;
@@ -74,6 +77,67 @@ public class GameLogic {
 				nameSet = true;
 			}
 		} while(!nameSet);
+		
+		Story.printIntro();
+		
+		//cria o jogador
 		player = new Player(name);
+		
+		Story.printFirstActIntro();
+		
+		isRunning = true;
+		
+		//começa o jogo
+		gameLoop();
+	}
+	
+	public static void continueJourney() {
+		
+	}
+	
+	public static void characterInfo() {
+		clearConsole();
+		printHeading("Character Info");
+		System.out.println(player.name + "\tHP: " + player.hp + "/" + player.maxHp);
+		printSeparator(20);
+		System.out.println("XP: " + player.xp);
+		
+		//printing traits
+		if(player.numAtkUpgrades > 0) {
+			System.out.println("Offensive trait: " + player.atkUpgrades[player.numAtkUpgrades - 1]);
+			printSeparator(20);
+		}
+		if(player.numDefUpgrades > 0) {
+			System.out.println("Defensive trait: " + player.defUpgrades[player.numDefUpgrades - 1]);
+			printSeparator(20);
+		}
+		
+		anythingToContinue();
+	}
+	
+	public static void printMenu() {
+		clearConsole();
+		printHeading(places[place]);
+		System.out.println("Select a action: ");
+		printSeparator(20);
+		System.out.println("(1) Continue Journey");
+		System.out.println("(2) Character Info");
+		System.out.println("(3) Exit Game");
+	}
+	
+	public static void gameLoop() {
+		while(isRunning) {
+			printMenu();
+			int input = readInt("->", 3);
+			if(input == 1) {
+				continueJourney();
+			}
+			else if(input == 2) {
+				characterInfo();
+			}
+			else {
+				isRunning = false;
+			}
+		}
 	}
 }
