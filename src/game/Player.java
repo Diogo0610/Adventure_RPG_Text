@@ -5,6 +5,8 @@ public class Player extends Character{
 	//store number of upgrades/skill in each path
 	public int numAtkUpgrades, numDefUpgrades;
 	
+	int gold, restsLefts, pots;
+	
 	//Arrays to store skill names
 	public String[] atkUpgrades = {"Strengh", "Power", "Might", "Godlike Strenght"};
 	public String[] defUpgrades = {"Heavy Bones", "Stoneskin", "Scale Armor", "Holy Aura"};
@@ -16,19 +18,22 @@ public class Player extends Character{
 		//Setting # of Upgrades
 		this.numAtkUpgrades = 0;
 		this.numDefUpgrades = 0;
+		this.gold = 5;
+		this.restsLefts = 1;
+		this.pots = 0;
 		chooseTrait();
 	}
 
 	@Override
 	public int attack() {
 
-		return 0;
+		return (int)(Math.random() * (xp / 4 + numAtkUpgrades * 3 + 3) + xp / 10 + numAtkUpgrades * 2 + numDefUpgrades + 1);
 	}
 
 	@Override
 	public int defend() {
 
-		return 0;
+		return (int)(Math.random() * (xp / 4 + numAtkUpgrades * 3 + 3) + xp / 10 + numAtkUpgrades * 2 + numDefUpgrades + 1);
 	}
 
 	public void chooseTrait() {
