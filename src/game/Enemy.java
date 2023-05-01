@@ -11,11 +11,11 @@ public class Enemy extends Character{
 
 	@Override
 	public int attack() {
-		return (int)(Math.random() * (playerXp / 4 + 1) + xp / 4 + 3);
+		return (int)(Math.random() * (playerXp / 4 + 1) + getXp() / 4 + 3);
 	}
 
 	@Override
 	public int defend() {
-		return (int)(Math.random() * (playerXp / 4 + 1) + xp / 4 + 3);
+		return (int)(Math.random() * (playerXp / 4 + 1) + getXp() / 4 + 3);
 	}
 }

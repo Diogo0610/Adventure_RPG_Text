@@ -4,8 +4,6 @@ import java.util.Scanner;
 public class GameLogic {
 	static Scanner scanner = new Scanner(System.in);
 	static UIMethods ui = new UIMethods();
-	static Progression progression = new Progression();
-	Story story = new Story();
 	static Player player;
 	public static boolean isRunning;
 	
@@ -37,11 +35,10 @@ public class GameLogic {
 		ui.clearConsole();
 		ui.printSeparator(40);
 		ui.printSeparator(30);
-		System.out.println("Title");
+		System.out.println("Expurgo do Condado");
 		ui.printSeparator(40);
 		ui.printSeparator(30);
 		anythingToContinue();
-		
 		
 		do {
 			ui.clearConsole();
@@ -58,12 +55,8 @@ public class GameLogic {
 			}
 		} while(!nameSet);
 		
-		story.printIntro();
-		
 		//cria o jogador
 		player = new Player(name);
-		
-		story.printFirstActIntro();
 		
 		isRunning = true;
 		
@@ -74,9 +67,9 @@ public class GameLogic {
 	public void characterInfo() {
 		ui.clearConsole();
 		ui.printHeading("Character Info");
-		System.out.println(player.name + "\tHP: " + player.hp + "/" + player.maxHp);
+		System.out.println(player.getName() + "\tHP: " + player.getHp() + "/" + player.getMaxHp());
 		ui.printSeparator(20);
-		System.out.println("XP: " + player.xp + "\tGold: " + player.gold);
+		System.out.println("XP: " + player.getXp() + "\tGold: " + player.gold);
 		ui.printSeparator(20);
 		System.out.println("Potions: " + player.pots);
 		ui.printSeparator(20);
@@ -119,10 +112,12 @@ public class GameLogic {
 	
 	public void gameLoop() {
 		while(isRunning) {
-			progression.journeyOptions();
+			GameFlow gameFlow = new GameFlow();
+			gameFlow.sequence();
+			GameFlow.progression.journeyOptions();
 			int input = readInt("->", 3);
 			if(input == 1) {
-				progression.continueJourney();
+				GameFlow.progression.randomBattle();
 			}
 			else if(input == 2) {
 				characterInfo();
