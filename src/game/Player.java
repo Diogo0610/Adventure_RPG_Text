@@ -2,8 +2,6 @@ package game;
 
 public class Player extends Character{
 	
-	UIMethods ui = new UIMethods();
-	
 	//store number of upgrades/skill in each path
 	public int numAtkUpgrades, numDefUpgrades;
 	
@@ -39,24 +37,24 @@ public class Player extends Character{
 	}
 
 	public void chooseTrait() {
-		ui.clearConsole();
-		ui.printHeading("Choose a trait:");
+		UIMethods.clearConsole();
+		UIMethods.printHeading("Choose a trait:");
 		System.out.println("(1) " + atkUpgrades[numAtkUpgrades]);
 		System.out.println("(2) " + defUpgrades[numDefUpgrades]);
 		
 		//getting player input
-		int input = GameLogic.readInt("-> ", 2);
-		ui.clearConsole();
+		int input = Input.read(2);
+		UIMethods.clearConsole();
 		
 		//deal with cases
 		if(input == 1) {
-			ui.printHeading("You choose: " + atkUpgrades[numAtkUpgrades]);
+			UIMethods.printHeading("You choose: " + atkUpgrades[numAtkUpgrades]);
 			numAtkUpgrades++;
 		} else {
-			ui.printHeading("You choose: " + defUpgrades[numDefUpgrades]);
+			UIMethods.printHeading("You choose: " + defUpgrades[numDefUpgrades]);
 			numDefUpgrades++;
 		}
-		GameLogic.anythingToContinue();
+		Input.anythingToContinue();
 		
 	}
 }

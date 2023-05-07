@@ -1,55 +1,52 @@
 package game;
-import java.util.Scanner;
 
 public class GameLogic {
-	static Scanner scanner = new Scanner(System.in);
-	static UIMethods ui = new UIMethods();
 	static Player player;
-	public static boolean isRunning;
+	boolean isRunning;
+	Battle battle;
+	private int place = 0;
+	private int act = 1;
+	public String[] places = {"Ponte do Brandevin", "Beirágua", "Sapântano", "Hobbiton"};
+	public String[] enemies = {"Bardeneiro", "Soldado recruta", "Lenhador", "Construtor de represa", "Incendiário"};
 	
-	public static int readInt(String prompt, int userChoices) {
-		int input;
-		
-		do{
-			System.out.print(prompt + " ");
-			try{
-				input = Integer.parseInt(scanner.next());
-			}
-			catch(Exception e){
-				input = -1;
-				System.out.println("Please enter an integer");
-			}
-		}while(input < 1 || input > userChoices);
-		return input;
+	public void setPlace(int place) {
+		this.place = place;
 	}
 	
-	public static void anythingToContinue() {
-		System.out.println("\nEnter anything to continue...");
-		scanner.next();
+	public int getPlace() {
+		return place;
+	}
+	
+	public void setAct(int act) {
+		this.act = act;
+	}
+	
+	public int getAct() {
+		return act;
 	}
 	
 	public void startGame() {
 		boolean nameSet = false;
 		String name;
 		//print title screen
-		ui.clearConsole();
-		ui.printSeparator(40);
-		ui.printSeparator(30);
+		UIMethods.clearConsole();
+		UIMethods.printSeparator(40);
+		UIMethods.printSeparator(30);
 		System.out.println("Expurgo do Condado");
-		ui.printSeparator(40);
-		ui.printSeparator(30);
-		anythingToContinue();
+		UIMethods.printSeparator(40);
+		UIMethods.printSeparator(30);
+		Input.anythingToContinue();
 		
 		do {
-			ui.clearConsole();
-			ui.printHeading("Whats your name?");
-			name = scanner.next();
+			UIMethods.clearConsole();
+			UIMethods.printHeading("Whats your name?");
+			name = Input.scanner.next();
 			//correct name
-			ui.clearConsole();
-			ui.printHeading("Your name is: " + name + ".\nIs that correct?");
+			UIMethods.clearConsole();
+			UIMethods.printHeading("Your name is: " + name + ".\nIs that correct?");
 			System.out.println("(1) Yes!");
 			System.out.println("(2) No! I want to change my name!");
-			int input = GameLogic.readInt("->", 2);
+			int input = Input.read(2);
 			if (input == 1) {
 				nameSet = true;
 			}
@@ -64,60 +61,66 @@ public class GameLogic {
 		gameLoop();
 	}
 	
+	public void journeyOptions() {
+		UIMethods.clearConsole();
+		UIMethods.printHeading(places[place]);
+		System.out.println("Select a action: ");
+		UIMethods.printSeparator(20);
+		System.out.println("(1) Batalhar");
+		System.out.println("(2) Informações do Personagem");
+		System.out.println("(3) Sair do jogo");
+	}
+	
 	public void characterInfo() {
-		ui.clearConsole();
-		ui.printHeading("Character Info");
+		UIMethods.clearConsole();
+		UIMethods.printHeading("Character Info");
 		System.out.println(player.getName() + "\tHP: " + player.getHp() + "/" + player.getMaxHp());
-		ui.printSeparator(20);
+		UIMethods.printSeparator(20);
 		System.out.println("XP: " + player.getXp() + "\tGold: " + player.gold);
-		ui.printSeparator(20);
+		UIMethods.printSeparator(20);
 		System.out.println("Potions: " + player.pots);
-		ui.printSeparator(20);
+		UIMethods.printSeparator(20);
 		
 		//printing traits
 		if(player.numAtkUpgrades > 0) {
 			System.out.println("Offensive trait: " + player.atkUpgrades[player.numAtkUpgrades - 1]);
-			ui.printSeparator(20);
+			UIMethods.printSeparator(20);
 		}
 		if(player.numDefUpgrades > 0) {
 			System.out.println("Defensive trait: " + player.defUpgrades[player.numDefUpgrades - 1]);
-			ui.printSeparator(20);
+			UIMethods.printSeparator(20);
 		}
 		
-		anythingToContinue();
+		Input.anythingToContinue();
 	}
 	
-	public void shop() {
-		ui.clearConsole();
-		ui.printHeading("You meet a mysterious Stranger.\nHe offers you something:");
-		int price = (int)(Math.random() * (10 + player.pots * 3) + 10 + player.pots);
-		System.out.println("- Magic Potion: " + price + " gold.");
-		ui.printSeparator(20);
-		System.out.println("Do you want to buy one?\n(1) Yes\n(2) No, thank you");
-		int input = readInt("->", 2);
-		
-		if(input ==1) {
-			ui.clearConsole();
-			if(player.gold > price) {
-				ui.printHeading("You bought a magical potion for " + price + " gold");
-				player.pots++;
-				player.gold -= price;
-			}
-			else {
-				ui.printHeading("You don't have money to buy this!");
-				anythingToContinue();
-			}
-		}
+	public void randomBattle() {
+		UIMethods.clearConsole();
+		UIMethods.printHeading("Battle Time!");
+		Input.anythingToContinue();
+		new Battle(new Enemy(enemies[(int)(Math.random()*enemies.length)], GameLogic.player.getXp()));
+	}
+	
+	public void finalBattle() {
+		new Battle(new Enemy("Evil Emperor", 300));
+		isRunning = false;
+	}
+	
+	public void playerDied() {
+		UIMethods.clearConsole();
+		System.out.println("YOU DIED! TRY AGAIN!");
+		System.out.println("You earned " + GameLogic.player.getXp() + " XP!");
+		isRunning = false;
 	}
 	
 	public void gameLoop() {
 		while(isRunning) {
 			GameFlow gameFlow = new GameFlow();
 			gameFlow.sequence();
-			GameFlow.progression.journeyOptions();
-			int input = readInt("->", 3);
+			journeyOptions();
+			int input = Input.read(3);
 			if(input == 1) {
-				GameFlow.progression.randomBattle();
+				randomBattle();
 			}
 			else if(input == 2) {
 				characterInfo();
