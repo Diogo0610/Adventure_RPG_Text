@@ -1,16 +1,15 @@
 package game;
 
 public class GameLogic {
-	static Player player;
-	boolean isRunning;
-	Battle battle;
-	private int place = 0;
-	private int act = 1;
 	public String[] places = {"Ponte do Brandevin", "Beirágua", "Sapântano", "Hobbiton"};
 	public String[] enemies = {"Bardeneiro", "Soldado recruta", "Lenhador", "Construtor de represa", "Incendiário"};
+	private static int place = 0, act = 1;
+	private static boolean isRunning;
+	static Player player;
+	Battle battle;
 	
 	public void setPlace(int place) {
-		this.place = place;
+		GameLogic.place = place;
 	}
 	
 	public int getPlace() {
@@ -18,11 +17,15 @@ public class GameLogic {
 	}
 	
 	public void setAct(int act) {
-		this.act = act;
+		GameLogic.act = act;
 	}
 	
 	public int getAct() {
 		return act;
+	}
+	
+	public void setIsRunning(boolean isRunning) {
+		GameLogic.isRunning = isRunning;
 	}
 	
 	public void startGame() {
