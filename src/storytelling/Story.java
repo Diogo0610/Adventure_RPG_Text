@@ -1,4 +1,4 @@
-package History;
+package storytelling;
 
 public interface Story {
 	

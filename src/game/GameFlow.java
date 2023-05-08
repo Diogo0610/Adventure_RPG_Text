@@ -1,5 +1,5 @@
 package game;
-import History.*;
+import storytelling.*;
 
 public class GameFlow {
 	static Story story;

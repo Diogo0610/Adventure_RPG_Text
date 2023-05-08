@@ -1,9 +1,9 @@
-package game;
+package characters;
 
 public abstract class Character {
 	
 	private String name;
-	private int maxHp, hp, xp;
+	private int maxHp, hp, xp, gold, pots;
 	
 	public Character(String name, int maxHp, int xp) {
 		this.name = name;
@@ -19,7 +19,7 @@ public abstract class Character {
 		return name;
 	}
 	
-	public void setMaxhp(int maxHp) {
+	public void setMaxHp(int maxHp) {
 		this.maxHp = maxHp;
 	}
 	public int getMaxHp() {
@@ -38,6 +38,22 @@ public abstract class Character {
 	}
 	public int getXp() {
 		return xp;
+	}
+	
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+	
+	public int getGold() {
+		return gold;
+	}
+	
+	public void setPots(int pots) {
+		this.pots = pots;
+	}
+	
+	public int getPots() {
+		return pots;
 	}
 	
 	public abstract int attack();

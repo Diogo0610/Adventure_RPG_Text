@@ -1,5 +1,7 @@
 package game;
 
+import characters.Enemy;
+
 public class Battle {
 	UIMethods ui = new UIMethods();
 	Enemy enemy;
@@ -77,11 +79,10 @@ public class Battle {
 			boolean addRest = (Math.random() * 5 + 1 <= 2.25);
 			int goldEarned = (int) (Math.random() * enemy.getXp());
 			if(addRest) {
-				GameLogic.player.restsLefts++;
 				System.out.println("You have a chance to rest");
 			}
 			if(goldEarned > 0) {
-				GameLogic.player.gold += goldEarned;
+				GameLogic.player.setGold(goldEarned);
 				System.out.println("You collect " + goldEarned + " gold from " + enemy.getName() + "'s corpse!");
 			}
 			Input.anythingToContinue();
@@ -92,9 +93,9 @@ public class Battle {
 	public void Heal() {
 		//Use potion
 		UIMethods.clearConsole();
-		if(GameLogic.player.pots > 0 && GameLogic.player.getHp() < GameLogic.player.getMaxHp()) {
+		if(GameLogic.player.getPots() > 0 && GameLogic.player.getHp() < GameLogic.player.getMaxHp()) {
 			//can take
-			UIMethods.printHeading("Do you want to drink a potion? (" + GameLogic.player.pots + " left).");
+			UIMethods.printHeading("Do you want to drink a potion? (" + GameLogic.player.getPots() + " left).");
 			System.out.println("(1) Yes\n(2) No, maybe later");
 			int input = Input.read(2);
 			if(input == 1) {

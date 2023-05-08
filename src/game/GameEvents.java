@@ -1,4 +1,4 @@
-package game;
+/*package game;
 
 public class GameEvents {
 	
@@ -50,4 +50,4 @@ public class GameEvents {
 			Input.anythingToContinue();
 		}
 	}
-}
+}*/

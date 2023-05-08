@@ -1,5 +1,7 @@
 package game;
 
+import characters.*;
+
 public class GameLogic {
 	public String[] places = {"Ponte do Brandevin", "Beirágua", "Sapântano", "Hobbiton"};
 	public String[] enemies = {"Bardeneiro", "Soldado recruta", "Lenhador", "Construtor de represa", "Incendiário"};
@@ -30,6 +32,7 @@ public class GameLogic {
 	
 	public void startGame() {
 		boolean nameSet = false;
+		boolean characterSet = false;
 		String name;
 		//print title screen
 		UIMethods.clearConsole();
@@ -42,13 +45,13 @@ public class GameLogic {
 		
 		do {
 			UIMethods.clearConsole();
-			UIMethods.printHeading("Whats your name?");
+			UIMethods.printHeading("Qual é o seu nome?");
 			name = Input.scanner.next();
 			//correct name
 			UIMethods.clearConsole();
-			UIMethods.printHeading("Your name is: " + name + ".\nIs that correct?");
-			System.out.println("(1) Yes!");
-			System.out.println("(2) No! I want to change my name!");
+			UIMethods.printHeading("Seu nome é: " + name + ".\nEstá correto?");
+			System.out.println("(1) Sim!");
+			System.out.println("(2) Não! Eu quero trocar meu nome!");
 			int input = Input.read(2);
 			if (input == 1) {
 				nameSet = true;
@@ -56,7 +59,36 @@ public class GameLogic {
 		} while(!nameSet);
 		
 		//cria o jogador
-		player = new Player(name);
+		do {
+			UIMethods.clearConsole();
+			UIMethods.printHeading("\"Escolha sua classe:\n1 - Guerreiro \n2 - Arqueiro \n3 - Druida \n4 - Bardo \n5 - Clérigo\"");
+			int input = Input.read(5);
+			switch(input) {
+				case 1:
+					player = new Warrior(name);
+					break;
+				case 2:
+					player = new Ranger(name);
+					break;
+				case 3:
+					player = new Druid(name);
+					break;
+				case 4:
+					player = new Bard(name);
+					break;
+				case 5:
+					player = new Cleric(name);
+					break;
+			}
+			UIMethods.clearConsole();
+			UIMethods.printHeading("Você escolheu a classe: " + player.showName() + ".\nTem certeza?");
+			System.out.println("(1) Sim!");
+			System.out.println("(2) Não! Eu quero trocar minha classe!");
+			input = Input.read(2);
+			if (input == 1) {
+				characterSet = true;
+			}
+		} while(!characterSet);
 		
 		isRunning = true;
 		
@@ -67,7 +99,7 @@ public class GameLogic {
 	public void journeyOptions() {
 		UIMethods.clearConsole();
 		UIMethods.printHeading(places[place]);
-		System.out.println("Select a action: ");
+		System.out.println("Selecione uma ação: ");
 		UIMethods.printSeparator(20);
 		System.out.println("(1) Batalhar");
 		System.out.println("(2) Informações do Personagem");
@@ -77,29 +109,21 @@ public class GameLogic {
 	public void characterInfo() {
 		UIMethods.clearConsole();
 		UIMethods.printHeading("Character Info");
+		System.out.println("Classe: " + player.showName());
+		UIMethods.printSeparator(20);
 		System.out.println(player.getName() + "\tHP: " + player.getHp() + "/" + player.getMaxHp());
 		UIMethods.printSeparator(20);
-		System.out.println("XP: " + player.getXp() + "\tGold: " + player.gold);
+		System.out.println("XP: " + player.getXp() + "\tGold: " + player.getGold());
 		UIMethods.printSeparator(20);
-		System.out.println("Potions: " + player.pots);
+		System.out.println("Potions: " + player.getPots());
 		UIMethods.printSeparator(20);
-		
-		//printing traits
-		if(player.numAtkUpgrades > 0) {
-			System.out.println("Offensive trait: " + player.atkUpgrades[player.numAtkUpgrades - 1]);
-			UIMethods.printSeparator(20);
-		}
-		if(player.numDefUpgrades > 0) {
-			System.out.println("Defensive trait: " + player.defUpgrades[player.numDefUpgrades - 1]);
-			UIMethods.printSeparator(20);
-		}
 		
 		Input.anythingToContinue();
 	}
 	
 	public void randomBattle() {
 		UIMethods.clearConsole();
-		UIMethods.printHeading("Battle Time!");
+		UIMethods.printHeading("Você encontrou um oponente!");
 		Input.anythingToContinue();
 		new Battle(new Enemy(enemies[(int)(Math.random()*enemies.length)], GameLogic.player.getXp()));
 	}
@@ -111,8 +135,8 @@ public class GameLogic {
 	
 	public void playerDied() {
 		UIMethods.clearConsole();
-		System.out.println("YOU DIED! TRY AGAIN!");
-		System.out.println("You earned " + GameLogic.player.getXp() + " XP!");
+		System.out.println("Você morreu! Tente novamente!");
+		System.out.println("Você obteve nessa jogada " + GameLogic.player.getXp() + " de XP!");
 		isRunning = false;
 	}
 	
