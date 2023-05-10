@@ -7,7 +7,7 @@ public class GameLogic {
 	public String[] enemies = {"Bardeneiro", "Soldado recruta", "Lenhador", "Construtor de represa", "Incendiário"};
 	private static int place = 0, act = 1;
 	private static boolean isRunning;
-	static Player player;
+	public static Player player;
 	Battle battle;
 	
 	public void setPlace(int place) {

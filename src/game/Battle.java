@@ -44,11 +44,11 @@ public class Battle {
 	public void confront(Enemy enemy) {
 		//cria um atributo local que calcula o dano que o jogador causará baseado na equação de ataque da
 		//classe Player, subtraindo da equação de defesa da clase Enemy
-		int dmg = GameLogic.player.attack() - enemy.defend();
+		int dmg = (GameLogic.player.attack() - enemy.defend());
 		
 		//cria um atributo local que calcula o dano que o jogador receberá baseado na equação de ataque da
 		//classe Enemy, subtraindo da equação de defesa da clase Player
-		int dmgTook = enemy.attack() - enemy.defend();
+		int dmgTook = (enemy.attack() - GameLogic.player.defend());
 		
 		if(dmgTook < 0) {
 			dmg -= dmgTook/2;
@@ -57,6 +57,7 @@ public class Battle {
 		if(dmg < 0) {
 			dmg = 0;
 		}
+		
 		GameLogic.player.setHp(GameLogic.player.getHp() - dmgTook);
 		enemy.setHp(enemy.getHp() - dmg);
 		
@@ -74,10 +75,10 @@ public class Battle {
 		else if(enemy.getHp() <= 0) {
 			UIMethods.clearConsole();
 			System.out.println("You defeated the " + enemy.getName() + "!");
-			GameLogic.player.setXp(GameLogic.player.getXp() + enemy.getXp());
+			GameLogic.player.setXp(GameLogic.player.getXp() + GameLogic.player.earnXp() + enemy.getXp());
 			System.out.println("You earned " + enemy.getXp() + "XP!");
 			boolean addRest = (Math.random() * 5 + 1 <= 2.25);
-			int goldEarned = (int) (Math.random() * enemy.getXp());
+			int goldEarned = GameLogic.player.collectGold();
 			if(addRest) {
 				System.out.println("You have a chance to rest");
 			}

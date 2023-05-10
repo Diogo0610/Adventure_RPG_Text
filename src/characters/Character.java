@@ -1,9 +1,11 @@
 package characters;
+import java.util.Random;
 
 public abstract class Character {
 	
 	private String name;
 	private int maxHp, hp, xp, gold, pots;
+	Random random = new Random();
 	
 	public Character(String name, int maxHp, int xp) {
 		this.name = name;
@@ -55,7 +57,7 @@ public abstract class Character {
 	public int getPots() {
 		return pots;
 	}
-	
+
 	public abstract int attack();
 	public abstract int defend();
 }

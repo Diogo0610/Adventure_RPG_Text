@@ -1,5 +1,7 @@
 package characters;
 
+import game.GameLogic;
+
 public class Warrior extends Character implements Player {
 
 	private String className = "Guerreiro";
@@ -10,26 +12,54 @@ public class Warrior extends Character implements Player {
 
 	@Override
 	public int attack() {
-		// TODO Auto-generated method stub
-		return 0;
+		int dmg = 0;
+		
+		if(getXp() == 0) {
+			dmg = random.nextInt(2, 8);
+			return dmg;
+		}
+		else {
+			dmg = Math.round((random.nextInt(2, 8) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
+			if (dmg <= 0) {
+				dmg = 2;
+				return dmg;
+			}
+			else {
+				return dmg;
+			}
+		}
 	}
 
 	@Override
 	public int defend() {
-		// TODO Auto-generated method stub
-		return 0;
+		int def = 0;
+		
+		if(getXp() == 0) {
+			def = random.nextInt(2, 8);
+			return def;
+		}
+		else{
+			def = Math.round((random.nextInt(2, 8) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
+			if(def <= 0) {
+				def = 1;
+				return def;
+			}
+			else {
+				return def;
+			}
+		}
 	}
 
 	@Override
 	public int collectGold() {
-		// TODO Auto-generated method stub
-		return 0;
+		int gold = Math.round((random.nextInt(0, 3)));
+		return gold;
 	}
 
 	@Override
 	public int earnXp() {
-		// TODO Auto-generated method stub
-		return 0;
+		int xp = 0;
+		return xp;
 	}
 	
 	public String showName() {
