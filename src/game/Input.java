@@ -17,14 +17,14 @@ public class Input {
 			}
 			catch(Exception e){
 				input = -1;
-				System.out.println("Please enter an integer");
+				System.out.println("Por favor insira apenas números.");
 			}
 		}while(input < 1 || input > userChoices);
 		return input;
 	}
 	
 	public static void anythingToContinue() {
-		System.out.println("\nEnter anything to continue...");
+		System.out.println("\nInsira qualquer coisa para continuar...");
 		Input.scanner.next();
 	}
 }

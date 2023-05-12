@@ -46,6 +46,7 @@ public class GameLogic {
 		do {
 			UIMethods.clearConsole();
 			UIMethods.printHeading("Qual é o seu nome?");
+			System.out.print("-> ");
 			name = Input.scanner.next();
 			//correct name
 			UIMethods.clearConsole();
@@ -61,7 +62,7 @@ public class GameLogic {
 		//cria o jogador
 		do {
 			UIMethods.clearConsole();
-			UIMethods.printHeading("\"Escolha sua classe:\n1 - Guerreiro \n2 - Arqueiro \n3 - Druida \n4 - Bardo \n5 - Clérigo\"");
+			UIMethods.printHeading("\"Escolha sua classe:\n1 - Guerreiro \n2 - Arqueiro \n3 - Druida \n4 - Bardo \n5 - Clérigo");
 			int input = Input.read(5);
 			switch(input) {
 				case 1:
@@ -130,8 +131,8 @@ public class GameLogic {
 		new Battle(new Enemy(enemies[(int)(Math.random()*enemies.length)], GameLogic.player.getXp()));
 	}
 	
-	public void finalBattle() {
-		new Battle(new Enemy("Evil Emperor", 300));
+	public static void finalBattle() {
+		new Battle(new Enemy("Saruman, o corrompido", 300));
 		isRunning = false;
 	}
 	
@@ -147,7 +148,7 @@ public class GameLogic {
 			GameFlow gameFlow = new GameFlow();
 			gameFlow.sequence();
 			journeyOptions();
-			int input = Input.read(5);
+			int input = Input.read(7);
 			if(input == 1) {
 				randomBattle();
 			}
@@ -159,6 +160,12 @@ public class GameLogic {
 			}
 			else if(input == 4) {
 				GameEvents.shop();
+			}
+			else if(input == 5) {
+				player.setGold(player.getGold() + 10);
+			}
+			else if(input == 6) {
+				player.setXp(player.getXp() + 10);
 			}
 			else{
 				isRunning = false;

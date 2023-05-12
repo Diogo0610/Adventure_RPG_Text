@@ -60,7 +60,8 @@ public class GameFlow {
 			chapterFourIntroShown = true;
 		}
 		if (!chapterFourEndShown && GameLogic.player.getXp() >= 85) {
-		    story.chapterEnd();
+		    GameLogic.finalBattle();
+			story.chapterEnd();
 		    gameLogic.setIsRunning(false);
 		}
 	}

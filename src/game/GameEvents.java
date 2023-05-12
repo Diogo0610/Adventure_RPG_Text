@@ -1,33 +1,35 @@
 package game;
+import java.util.Random;
 
 public class GameEvents {
+	static Random random = new Random();
+	static GameLogic gameLogic = new GameLogic();
 	
 	public static void shop() {
-		int playerPotions = GameLogic.player.getPots();
 		UIMethods.clearConsole();
-		UIMethods.printHeading("You meet a mysterious Stranger.\nHe offers you something:");
-		int price = (int)(Math.random() * (10 + GameLogic.player.getPots() * 3) + 10 + GameLogic.player.getPots());
-		System.out.println("- Magic Potion: " + price + " gold.");
+		UIMethods.printHeading("Você chamou Tom Bombadil.\nEle te oferece uma coisa:");
+		int price = (random.nextInt(4, 16) + gameLogic.getAct()) ;
+		System.out.println("- Poção restauradora: " + price + " de ouro.");
 		UIMethods.printSeparator(20);
-		System.out.println("Do you want to buy one?\n(1) Yes\n(2) No, thank you");
+		System.out.println("Você quer comprar uma?\n(1) Sim\n(2) Não, obrigado");
 		int input = Input.read(2);
 		
 		if(input ==1) {
 			UIMethods.clearConsole();
 			if(GameLogic.player.getGold() > price) {
-				UIMethods.printHeading("You bought a magical potion for " + price + " gold");
-				GameLogic.player.setPots(playerPotions++);
-				GameLogic.player.setGold(-price);
+				UIMethods.printHeading("Você comprou uma poção por " + price + " ouro");
+				GameLogic.player.setPots(GameLogic.player.getPots() + 1);
+				GameLogic.player.setGold(GameLogic.player.getGold() - price);
+				Input.anythingToContinue();
 			}
 			else {
-				UIMethods.printHeading("You don't have money to buy this!");
+				UIMethods.printHeading("Você não tem ouro para comprar isso!");
 				Input.anythingToContinue();
 			}
 		}
 	}
 	
 	public static void takeRest() {
-		int playerRests = GameLogic.player.getRests();
 		UIMethods.clearConsole();
 		if(GameLogic.player.getRests() >= 1) {
 			UIMethods.printHeading("Você deseja descansar?(" + GameLogic.player.getRests() + " descansos restantes).");
@@ -43,11 +45,11 @@ public class GameEvents {
 					}
 					System.out.println("Você descansou e restaurou " + hpRestored + " de hp!");
 					System.out.println("Você está agora com " + GameLogic.player.getHp() + "/" + GameLogic.player.getMaxHp() + " de saúde.");
-					GameLogic.player.setRests(playerRests--);
+					GameLogic.player.setRests(GameLogic.player.getRests() - 1);
 				}
 			}
 			else {
-				System.out.println("You don't rest.");
+				System.out.println("Você não descansou.");
 			}
 			Input.anythingToContinue();
 		}
