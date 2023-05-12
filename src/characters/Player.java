@@ -10,12 +10,14 @@ public interface Player{
 	public abstract int getXp();
 	public abstract int getGold();
 	public abstract int getPots();
+	public abstract int getRests();
 	public abstract int getMaxHp();
 	public abstract String getName();
 	public abstract void setHp(int hp);
 	public abstract void setXp(int xp);
 	public abstract void setGold(int gold);
 	public abstract void setPots(int pots);
+	public abstract void setRests(int rests);
 	public abstract void setMaxHp(int maxHp);
 	public abstract String showName();
 }

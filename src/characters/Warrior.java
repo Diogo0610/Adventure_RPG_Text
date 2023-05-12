@@ -7,7 +7,7 @@ public class Warrior extends Character implements Player {
 	private String className = "Guerreiro";
 	
 	public Warrior(String name) {
-		super(name, 50, 0);
+		super(name, 35, 0, 10, 2, 0);
 	}
 
 	@Override

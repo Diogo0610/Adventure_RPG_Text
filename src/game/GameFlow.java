@@ -20,7 +20,7 @@ public class GameFlow {
 	        story.chapterIntro();
 	        chapterOneIntroShown = true;
 	    } 
-		if (!chapterOneEndShown && GameLogic.player.getXp() >= 5) {
+		if (!chapterOneEndShown && GameLogic.player.getXp() >= 15) {
 	        story.chapterEnd();
 	        chapterOneEndShown = true;
 	        gameLogic.setAct(2);
@@ -33,7 +33,7 @@ public class GameFlow {
 	    	story.chapterIntro();
 	        chapterTwoIntroShown = true;
 	    }
-		if (!chapterTwoEndShown && GameLogic.player.getXp() >= 10) {
+		if (!chapterTwoEndShown && GameLogic.player.getXp() >= 30) {
 	        story.chapterEnd();
 	        chapterTwoEndShown = true;
 	        gameLogic.setAct(3);
@@ -46,7 +46,7 @@ public class GameFlow {
 	    	story.chapterIntro();
 	        chapterThreeIntroShown = true;
 	    }
-		if (!chapterThreeEndShown && GameLogic.player.getXp() >= 15) {
+		if (!chapterThreeEndShown && GameLogic.player.getXp() >= 50) {
 	        story.chapterEnd();
 	        chapterThreeEndShown = true;
 	        gameLogic.setAct(4);
@@ -59,7 +59,7 @@ public class GameFlow {
 		    story.chapterIntro();
 			chapterFourIntroShown = true;
 		}
-		if (!chapterFourEndShown && GameLogic.player.getXp() >= 20) {
+		if (!chapterFourEndShown && GameLogic.player.getXp() >= 85) {
 		    story.chapterEnd();
 		    gameLogic.setIsRunning(false);
 		}

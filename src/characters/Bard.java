@@ -1,36 +1,66 @@
 package characters;
 
+import game.GameLogic;
+
 public class Bard extends Character implements Player {
 
 	private String className = "Bardo";
 	
 	public Bard(String name) {
-		super(name, 30, 0);
+		super(name, 40, 0, 2, 1, 2);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public int attack() {
-		// TODO Auto-generated method stub
-		return 0;
+		int dmg = 0;
+		
+		if(getXp() == 0) {
+			dmg = random.nextInt(1, 4);
+			return dmg;
+		}
+		else {
+			dmg = Math.round((random.nextInt(1, 4) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
+			if (dmg <= 0) {
+				dmg = 2;
+				return dmg;
+			}
+			else {
+				return dmg;
+			}
+		}
 	}
 
 	@Override
 	public int defend() {
-		// TODO Auto-generated method stub
-		return 0;
+		int def = 0;
+		
+		if(getXp() == 0) {
+			def = random.nextInt(1, 4);
+			return def;
+		}
+		else{
+			def = Math.round((random.nextInt(1, 4) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
+			if(def <= 0) {
+				def = 1;
+				return def;
+			}
+			else {
+				return def;
+			}
+		}
 	}
 
 	@Override
 	public int collectGold() {
-		// TODO Auto-generated method stub
-		return 0;
+		int gold = Math.round((random.nextInt(3, 6)));
+		return gold;
 	}
 
 	@Override
 	public int earnXp() {
-		// TODO Auto-generated method stub
-		return 0;
+		int xp = 3;
+		return xp;
 	}
 	
 	public String showName() {

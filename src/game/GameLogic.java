@@ -103,7 +103,9 @@ public class GameLogic {
 		UIMethods.printSeparator(20);
 		System.out.println("(1) Batalhar");
 		System.out.println("(2) Informações do Personagem");
-		System.out.println("(3) Sair do jogo");
+		System.out.println("(3) Descançar");
+		System.out.println("(4) Comprar poção");
+		System.out.println("(5) Sair do jogo");
 	}
 	
 	public void characterInfo() {
@@ -145,14 +147,20 @@ public class GameLogic {
 			GameFlow gameFlow = new GameFlow();
 			gameFlow.sequence();
 			journeyOptions();
-			int input = Input.read(3);
+			int input = Input.read(5);
 			if(input == 1) {
 				randomBattle();
 			}
 			else if(input == 2) {
 				characterInfo();
 			}
-			else {
+			else if(input == 3) {
+				GameEvents.takeRest();
+			}
+			else if(input == 4) {
+				GameEvents.shop();
+			}
+			else{
 				isRunning = false;
 			}
 		}

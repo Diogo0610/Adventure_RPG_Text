@@ -1,11 +1,12 @@
-/*package game;
+package game;
 
 public class GameEvents {
 	
-	public void shop() {
+	public static void shop() {
+		int playerPotions = GameLogic.player.getPots();
 		UIMethods.clearConsole();
 		UIMethods.printHeading("You meet a mysterious Stranger.\nHe offers you something:");
-		int price = (int)(Math.random() * (10 + GameLogic.player.pots * 3) + 10 + GameLogic.player.pots);
+		int price = (int)(Math.random() * (10 + GameLogic.player.getPots() * 3) + 10 + GameLogic.player.getPots());
 		System.out.println("- Magic Potion: " + price + " gold.");
 		UIMethods.printSeparator(20);
 		System.out.println("Do you want to buy one?\n(1) Yes\n(2) No, thank you");
@@ -13,10 +14,10 @@ public class GameEvents {
 		
 		if(input ==1) {
 			UIMethods.clearConsole();
-			if(GameLogic.player.gold > price) {
+			if(GameLogic.player.getGold() > price) {
 				UIMethods.printHeading("You bought a magical potion for " + price + " gold");
-				GameLogic.player.pots++;
-				GameLogic.player.gold -= price;
+				GameLogic.player.setPots(playerPotions++);
+				GameLogic.player.setGold(-price);
 			}
 			else {
 				UIMethods.printHeading("You don't have money to buy this!");
@@ -25,11 +26,12 @@ public class GameEvents {
 		}
 	}
 	
-	public void takeRest() {
+	public static void takeRest() {
+		int playerRests = GameLogic.player.getRests();
 		UIMethods.clearConsole();
-		if(GameLogic.player.restsLefts >= 1) {
-			UIMethods.printHeading("Do you want to take a rest?(" + GameLogic.player.restsLefts + " rests lefts).");
-			System.out.println("(1) Yes\n(2) No");
+		if(GameLogic.player.getRests() >= 1) {
+			UIMethods.printHeading("Você deseja descansar?(" + GameLogic.player.getRests() + " descansos restantes).");
+			System.out.println("(1) Sim\n(2) Não");
 			int input = Input.read(2);
 			if(input == 1) {
 				UIMethods.clearConsole();
@@ -39,9 +41,9 @@ public class GameEvents {
 					if(GameLogic.player.getHp() > GameLogic.player.getMaxHp()) {
 						GameLogic.player.setHp(GameLogic.player.getMaxHp());
 					}
-					System.out.println("You took a rest and restored " + hpRestored + " hp!");
-					System.out.println("You're now at " + GameLogic.player.getHp() + "/" + GameLogic.player.getMaxHp() + " health.");
-					GameLogic.player.restsLefts--;
+					System.out.println("Você descansou e restaurou " + hpRestored + " de hp!");
+					System.out.println("Você está agora com " + GameLogic.player.getHp() + "/" + GameLogic.player.getMaxHp() + " de saúde.");
+					GameLogic.player.setRests(playerRests--);
 				}
 			}
 			else {
@@ -49,5 +51,9 @@ public class GameEvents {
 			}
 			Input.anythingToContinue();
 		}
+		else {
+			System.out.println("Você ainda não pode descansar");
+			Input.anythingToContinue();
+		}
 	}
-}*/
+}

@@ -76,10 +76,12 @@ public class Battle {
 			UIMethods.clearConsole();
 			System.out.println("You defeated the " + enemy.getName() + "!");
 			GameLogic.player.setXp(GameLogic.player.getXp() + GameLogic.player.earnXp() + enemy.getXp());
-			System.out.println("You earned " + enemy.getXp() + "XP!");
-			boolean addRest = (Math.random() * 5 + 1 <= 2.25);
+			System.out.println("You earned " + (enemy.getXp() +  GameLogic.player.earnXp()) + "XP!");
+			boolean addRest = (Math.random() * 5 + 1 <= 7.25);
 			int goldEarned = GameLogic.player.collectGold();
 			if(addRest) {
+				int rests = GameLogic.player.getRests();
+				GameLogic.player.setRests(rests++);
 				System.out.println("You have a chance to rest");
 			}
 			if(goldEarned > 0) {
@@ -92,10 +94,8 @@ public class Battle {
 	}
 
 	public void Heal() {
-		//Use potion
 		UIMethods.clearConsole();
 		if(GameLogic.player.getPots() > 0 && GameLogic.player.getHp() < GameLogic.player.getMaxHp()) {
-			//can take
 			UIMethods.printHeading("Do you want to drink a potion? (" + GameLogic.player.getPots() + " left).");
 			System.out.println("(1) Yes\n(2) No, maybe later");
 			int input = Input.read(2);

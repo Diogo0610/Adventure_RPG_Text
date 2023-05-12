@@ -7,7 +7,7 @@ public class Enemy extends Character{
 	int playerXp;
 
 	public Enemy(String name, int playerXp) {
-		super(name, (int)(Math.random() * playerXp / 3 + 5), (int)(Math.random() * (playerXp / 4 + 2) + 1));
+		super(name, (int)(Math.random() * playerXp / 3 + 5), (int)(Math.random() * (playerXp / 4 + 2) + 1), 0, 0, 0);
 		this.playerXp = playerXp;
 	}
 
@@ -20,7 +20,7 @@ public class Enemy extends Character{
 			return dmg;
 		}
 		else {
-			dmg = Math.round((random.nextInt(2, 10) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
+			dmg = Math.round((random.nextInt(2, 7) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
 			if (dmg <= 0) {
 				dmg = 5;
 				return dmg;

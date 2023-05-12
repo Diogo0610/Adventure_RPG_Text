@@ -4,14 +4,16 @@ import java.util.Random;
 public abstract class Character {
 	
 	private String name;
-	private int maxHp, hp, xp, gold, pots;
+	private int maxHp, hp, xp, gold, pots, rests;
 	Random random = new Random();
 	
-	public Character(String name, int maxHp, int xp) {
+	public Character(String name, int maxHp, int xp, int gold, int pots, int rests) {
 		this.name = name;
 		this.maxHp = maxHp;
 		this.hp = maxHp;
 		this.xp = xp;
+		this.pots = pots;
+		this.rests = rests;
 	}
 	
 	public void setName(String name) {
@@ -56,6 +58,14 @@ public abstract class Character {
 	
 	public int getPots() {
 		return pots;
+	}
+
+	public int getRests() {
+		return rests;
+	}
+
+	public void setRests(int rests) {
+		this.rests = rests;
 	}
 
 	public abstract int attack();
