@@ -10,7 +10,6 @@ public class Battle {
 	 * "gameLogic": Uma instância da classe "GameLogic" para acessar métodos e atributos relacionados à lógica do jogo.
 	 * "isFighting": Um atributo booleano que indica se a batalha está em andamento ou não.
 	 */
-	UIMethods ui = new UIMethods();
 	Enemy enemy;
 	GameLogic gameLogic = new GameLogic();
 	private boolean isFighting;
@@ -51,7 +50,7 @@ public class Battle {
 			if(input == 1) {
 				confront(enemy);
 			}
-			else if(input ==2) {
+			else if(input == 2) {
 				Heal();
 			}
 			else {
@@ -100,7 +99,7 @@ public class Battle {
 		}
 		else if(enemy.getHp() <= 0) {
 			UIMethods.clearConsole();
-			System.out.println("Você derrotou o " + enemy.getName() + "!");
+			System.out.println("Você derrotou " + enemy.getName() + "!");
 			GameLogic.player.setXp(GameLogic.player.getXp() + GameLogic.player.earnXp() + enemy.getXp());
 			System.out.println("Você ganhou " + (enemy.getXp() +  GameLogic.player.earnXp()) + "XP!");
 			boolean addRest = (Math.random() * 5 + 1 <= 7.25);

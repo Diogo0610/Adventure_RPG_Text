@@ -8,7 +8,6 @@ public class Druid extends Character implements Player {
 	
 	public Druid(String name) {
 		super(name, 35, 0, 5, 1, 1);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -8,7 +8,6 @@ public class Bard extends Character implements Player {
 	
 	public Bard(String name) {
 		super(name, 40, 0, 2, 1, 2);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -36,13 +35,13 @@ public class Bard extends Character implements Player {
 		int def = 0;
 		
 		if(getXp() == 0) {
-			def = random.nextInt(1, 4);
+			def = random.nextInt(2, 5);
 			return def;
 		}
 		else{
-			def = Math.round((random.nextInt(1, 4) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
+			def = Math.round((random.nextInt(2, 5) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
 			if(def <= 0) {
-				def = 1;
+				def = 2;
 				return def;
 			}
 			else {

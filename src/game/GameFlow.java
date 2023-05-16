@@ -47,7 +47,6 @@ public class GameFlow {
 	        chapterOneEndShown = true;
 	        gameLogic.setAct(2);
 	        gameLogic.setPlace(1);
-	        System.out.println("lugar: " + gameLogic.getPlace());
 	    } 
 		//Capítulo 2
 		if (!chapterTwoIntroShown && gameLogic.getAct() == 2) {
@@ -60,7 +59,6 @@ public class GameFlow {
 	        chapterTwoEndShown = true;
 	        gameLogic.setAct(3);
 	        gameLogic.setPlace(2);
-	        System.out.println("lugar: " + gameLogic.getPlace());
 	    }
 		//Capítulo 3
 		if (!chapterThreeIntroShown && gameLogic.getAct() == 3) {
@@ -73,7 +71,6 @@ public class GameFlow {
 	        chapterThreeEndShown = true;
 	        gameLogic.setAct(4);
 	        gameLogic.setPlace(3);
-	        System.out.println("lugar: " + gameLogic.getPlace());
 	    }
 		//Capítulo 4
 		if (!chapterFourIntroShown && gameLogic.getAct() == 4) {

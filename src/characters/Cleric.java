@@ -8,7 +8,6 @@ public class Cleric extends Character implements Player {
 	
 	public Cleric(String name) {
 		super(name, 25, 0, 10, 2, 0);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

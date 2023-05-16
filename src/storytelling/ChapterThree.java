@@ -4,7 +4,6 @@ import game.Input;
 import game.UIMethods;
 
 public class ChapterThree implements Story{
-UIMethods ui = new UIMethods();
 	
 	@Override
 	public void chapterIntro() {

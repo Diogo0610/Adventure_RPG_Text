@@ -16,7 +16,7 @@ public class GameLogic {
 	public String[] places = {"Ponte do Brandevin", "Beirágua", "Sapântano", "Hobbiton"};
 	public String[] enemies = {"Bardeneiro", "Soldado recruta", "Lenhador", "Construtor de represa", "Incendiário"};
 	private static int place = 0, act = 1;
-	private static boolean isRunning;
+	private boolean isRunning;
 	public static Player player;
 	Battle battle;
 	
@@ -42,7 +42,7 @@ public class GameLogic {
 	
 	//Define se o jogo está em execução.
 	public void setIsRunning(boolean isRunning) {
-		GameLogic.isRunning = isRunning;
+		this.isRunning = isRunning;
 	}
 	
 	/*
@@ -127,7 +127,7 @@ public class GameLogic {
 		UIMethods.printSeparator(20);
 		System.out.println("(1) Batalhar");
 		System.out.println("(2) Informações do Personagem");
-		System.out.println("(3) Descançar");
+		System.out.println("(3) Descansar");
 		System.out.println("(4) Comprar poção");
 		System.out.println("(5) Sair do jogo");
 	}
@@ -159,7 +159,6 @@ public class GameLogic {
 	//Inicia a batalha final com um inimigo específico.
 	public static void finalBattle() {
 		new Battle(new Enemy("Saruman, o corrompido", 300));
-		isRunning = false;
 	}
 	
 	//Exibe uma mensagem de que o jogador morreu e encerra o jogo.
@@ -180,7 +179,7 @@ public class GameLogic {
 			GameFlow gameFlow = new GameFlow();
 			gameFlow.sequence();
 			journeyOptions();
-			int input = Input.read(7);
+			int input = Input.read(5);
 			if(input == 1) {
 				randomBattle();
 			}
@@ -192,12 +191,6 @@ public class GameLogic {
 			}
 			else if(input == 4) {
 				GameEvents.shop();
-			}
-			else if(input == 5) {
-				player.setGold(player.getGold() + 10);
-			}
-			else if(input == 6) {
-				player.setXp(player.getXp() + 10);
 			}
 			else{
 				isRunning = false;

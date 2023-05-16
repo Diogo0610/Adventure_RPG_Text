@@ -16,13 +16,13 @@ public class Enemy extends Character{
 		int dmg = 0;
 		
 		if(GameLogic.player.getXp() == 0) {
-			dmg = random.nextInt(2, 10);
+			dmg = random.nextInt(2, 7);
 			return dmg;
 		}
 		else {
 			dmg = Math.round((random.nextInt(2, 7) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
 			if (dmg <= 0) {
-				dmg = 5;
+				dmg = 3;
 				return dmg;
 			}
 			else {
@@ -42,7 +42,7 @@ public class Enemy extends Character{
 		else{
 			def = Math.round((random.nextInt(0, 6) * GameLogic.player.getXp()) / GameLogic.player.getXp() - random.nextInt(1, 3));
 			if(def <= 0) {
-				def = 2;
+				def = 1;
 				return def;
 			}
 			else {
