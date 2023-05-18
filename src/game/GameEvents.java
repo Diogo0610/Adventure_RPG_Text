@@ -9,7 +9,7 @@ public class GameEvents {
 	 * Método "shop()": Este método representa a interação do jogador com uma loja no jogo. 
 	 * Ele realiza as seguintes ações:
 	 * - Limpa o console.
-	 * - Imprime um cabeçalho informando que o jogador está sendo atendido por Tom Bombadil.
+	 * - Imprime um cabeçalho informando que o jogador está sendo atendido por uma águia mercante.
 	 * - Calcula o preço da poção restauradora com base em um valor aleatório entre 4 e 16, somado 
 	 *   ao valor retornado pelo método "getAct()" da classe "GameLogic".
 	 * - Imprime o preço da poção.
@@ -27,7 +27,7 @@ public class GameEvents {
 	 */
 	public static void shop() {
 		UIMethods.clearConsole();
-		UIMethods.printHeading("Você chamou Tom Bombadil.\nEle te oferece uma coisa:");
+		UIMethods.printHeading("Você chamou uma águia mercante.\nEla te oferece uma coisa:");
 		int price = (random.nextInt(4, 16) + gameLogic.getAct()) ;
 		System.out.println("- Poção restauradora: " + price + " de ouro.");
 		UIMethods.printSeparator(20);
