@@ -14,7 +14,7 @@ public class GameLogic {
 	 * battle: Uma instância da classe Battle usada para iniciar batalhas.
 	 */
 	public String[] places = {"Ponte do Brandevin", "Beirágua", "Sapântano", "Hobbiton"};
-	public String[] enemies = {"Bardeneiro", "Soldado recruta", "Lenhador", "Construtor de represa", "Incendiário"};
+	public String[] enemies = {"Orc", "Uruk Hai", "Mercenário", "Cultista do Olho", "Lacaio do Mago Branco"};
 	private static int place = 0, act = 1;
 	private boolean isRunning;
 	public static Player player;
@@ -81,7 +81,11 @@ public class GameLogic {
 		//cria o jogador
 		do {
 			UIMethods.clearConsole();
-			UIMethods.printHeading("\"Escolha sua classe:\n1 - Guerreiro \n2 - Arqueiro \n3 - Druida \n4 - Bardo \n5 - Clérigo");
+			UIMethods.printHeading("\"Escolha sua classe:\n1 - Guerreiro - Foco em: ataque e defesa"
+					+ "\n2 - Arqueiro - Foco em: ataque e ouro"
+					+ "\n3 - Druida - Foco em: ataque, defesa e vida"
+					+ "\n4 - Bardo - Foco em: ouro e experiência"
+					+ "\n5 - Clérigo - Foco em: defesa e experiência");
 			int input = Input.read(5);
 			switch(input) {
 				case 1:
