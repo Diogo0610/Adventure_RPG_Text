@@ -1,10 +1,5 @@
 package characters;
 
-/*
- * A interface Player define um conjunto de métodos que são necessários para representar um jogador no jogo. 
- * Esses métodos devem ser implementados nas classes de jogadores específicas, como
- * Warrior, Ranger, Druid, Bard e Cleric, para fornecer a funcionalidade adequada a cada classe.
- */
 public interface Player{
 
 	//Representa o ataque do jogador. Retorna um valor inteiro que representa o dano causado.

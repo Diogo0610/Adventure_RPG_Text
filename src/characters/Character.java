@@ -2,25 +2,11 @@ package characters;
 import java.util.Random;
 
 public abstract class Character {
-	
-	/*
-	 * name: O nome do personagem.
-	 * maxHp: A quantidade máxima de pontos de vida do personagem.
-	 * hp: A quantidade atual de pontos de vida do personagem.
-	 * xp: A quantidade atual de experiência do personagem.
-	 * gold: A quantidade atual de ouro do personagem.
-	 * pots: A quantidade atual de poções do personagem.
-	 * rests: A quantidade atual de descansos do personagem.
-	 * random: Um objeto da classe Random para gerar números aleatórios.
-	 */
+
 	private String name;
 	private int maxHp, hp, xp, gold, pots, rests;
 	Random random = new Random();
 	
-	/*
-	 * Character(String name, int maxHp, int xp, int gold, int pots, int rests): 
-	 * Constrói um objeto Character com os atributos iniciais fornecidos.
-	 */
 	public Character(String name, int maxHp, int xp, int gold, int pots, int rests) {
 		this.name = name;
 		this.maxHp = maxHp;
@@ -30,7 +16,6 @@ public abstract class Character {
 		this.rests = rests;
 	}
 	
-	//Define o nome do personagem.
 	public void setName(String name) {
 		this.name = name;
 	}
